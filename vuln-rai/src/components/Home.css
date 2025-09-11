@@ -1,0 +1,360 @@
+
+/* Home.css */
+
+/* Reset */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* 🌙 Dark mode */
+.dark {
+  background: radial-gradient(
+    120% 120% at 80% 28%,
+    rgba(31, 11, 98, 1) 0%,
+    rgba(127, 91, 164, 1) 55%,
+    rgba(222, 171, 231, 1) 100%
+  );
+  color: #fff;
+}
+
+/* ☀️ Light mode */
+.light {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Buttons */
+.toggle-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+.toggle-btn:hover {
+  background-color: #ddd;
+}
+.icon {
+  width: 20px;
+  height: 20px;
+}
+.sun {
+  color: #facc15;
+}
+.moon {
+  color: #333;
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 1rem 0;
+  backdrop-filter: blur(10px);
+  font-family: "Major Mono Display", monospace;
+}
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+.logo {
+  width: 45px;
+  height: 45px;
+}
+.light .brand {
+  color: #000;
+}
+.dark .brand {
+  color: #fff;
+}
+.brand {
+  font-size: 18px;
+  font-weight: bold;
+  /* font-family: "Playwrite US Modern", cursive; */
+  position: relative;
+  left: -13px;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+.light .nav-links li {
+  color: #000;
+}
+.dark .nav-links li {
+  color: #fff;
+}
+.nav-links li {
+  cursor: pointer;
+  font-size: 15px;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+.nav-links li:hover {
+  color: #d66baa;
+  border-bottom: 2px solid #d66baa;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  padding: 10px;
+  font-family: "Major Mono Display", monospace;
+}
+.hero1 {
+  position: relative;
+  display: inline-block;
+}
+.center-text {
+  text-align: center;
+  padding: 2rem;
+  font-size: 20px;
+  line-height: 1.8;
+  margin: 0 auto;
+  font-style: oblique;
+}
+.light .center-text {
+  color: #000;
+}
+.dark .center-text {
+  color: #fff;
+}
+.meetCyra {
+  font-size: 70px;
+font-family: "Major Mono Display", monospace;
+}
+.light .meetCyra {
+  color: #000;
+}
+.dark .meetCyra {
+  color: #fff;
+}
+.try {
+  background-color: #1f0b62;
+  opacity: 0.7;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.try:hover {
+  background-color: #1f0b62;
+}
+.VC1 {
+  opacity: 0.7;
+  filter: blur(1px);
+  margin-right: 70px;
+}
+
+/* ---------- ADVANTAGES ---------- */
+.advantages {
+  padding: 6rem 2rem;
+  font-family: "Major Mono Display", monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+.light .advantages {
+  background-color: #fafafa;
+  color: #000;
+}
+.dark .advantages {
+  background: radial-gradient(
+    150% 150% at 20% 120%,
+    rgba(31, 11, 98, 1) 20%,
+    rgba(127, 91, 164, 1) 70%,
+    rgba(222, 171, 231, 1) 90%
+  );
+  color: #fff;
+}
+.adv-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 4rem;
+  font-weight: 600;
+}
+.shields-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+.shield {
+  position: absolute;
+  width: 260px;
+  height: 280px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+.shield-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+}
+.shield:hover .shield-inner {
+  transform: rotateY(180deg);
+}
+.shield-front,
+.shield-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 60% / 40%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  text-align: center;
+  color: #fff;
+}
+.shield-front h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+.shield-front p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+.shield-back {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  transform: rotateY(180deg);
+  padding: 1.5rem;
+}
+/* Shield gradients */
+.shield-c .shield-front,
+.shield-c .shield-back {
+  background: linear-gradient(145deg, #1f0b62, #a083c2);
+}
+.shield-y .shield-front,
+.shield-y .shield-back {
+  background: linear-gradient(145deg, #5e3b9c, #7f5ba4);
+}
+.shield-r .shield-front,
+.shield-r .shield-back {
+  background: linear-gradient(145deg, #a083c2, #1f0b62);
+}
+.shield-a .shield-front,
+.shield-a .shield-back {
+  background: linear-gradient(145deg, #7f5ba4, #5e3b9c);
+}
+/* Positions */
+.shields-container .shield:nth-child(1) {
+  top: 0;
+  right: 5%;
+}
+.shields-container .shield:nth-child(2) {
+  top: 20%;
+  right: 25%;
+}
+.shields-container .shield:nth-child(3) {
+  top: 40%;
+  right: 45%;
+}
+.shields-container .shield:nth-child(4) {
+  bottom: 0;
+  left: 5%;
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+  font-size: 15px;
+  padding: 8rem;
+}
+.light .footer {
+  background-color: #f5f5f5;
+  color: #000;
+}
+.dark .footer {
+  background: radial-gradient(
+    150% 150% at 20% 120%,
+    rgba(31, 11, 98, 1) 20%,
+    rgba(127, 91, 164, 1) 70%,
+    rgba(222, 171, 231, 1) 90%
+  );
+  color: #fff;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+}
+.footer h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.footer ul {
+  list-style-type: none;
+  padding: 0;
+}
+.footer li {
+  font-size: 13px;
+  line-height: 1.8;
+}
+.footer p {
+  font-size: 13px;
+  margin: 0.3rem 0;
+}
+.footer-brand {
+  text-align: center;
+}
+.footer-brand h2 {
+  font-size: 20px;
+  margin-bottom: 0.5rem;
+}
+.footer-brand p {
+  font-size: 12px;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+.socials {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+.socials .icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+.socials .icon:hover {
+  transform: scale(1.1);
+  color: #d66baa;
+}
+.footer-bottom {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 1rem;
+}
