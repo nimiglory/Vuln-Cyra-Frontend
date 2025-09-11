@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Urls from "./components/Urls";
 import Signup from "./components/Signup";
 import Signin from "./components/Signin";
+import Dashboard from "./components/Dashboard";
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/Urls" element={<Urls />} /> {/* Scanner page */}
          <Route path="/Signup" element={<Signup />} />
           <Route path="/Signin" element={<Signin />} />
+        <Route path="/Dashboard" element={<Dashboard />} /> {/* Dashboard page */}
       </Routes>
     </Router>
   );
