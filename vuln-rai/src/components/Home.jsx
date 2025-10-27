@@ -27,16 +27,26 @@ function Home() {
   const { user, logout, loading } = useAuth();
   const navigate = useNavigate();
 
-  // Handle Try Now button click
+  // ✅ Handle Try Now button click - REDIRECT IF NOT LOGGED IN
   const handleTryNow = () => {
-    navigate('/Urls');
+    if (user) {
+      // User is logged in - go to URLs page
+      navigate('/Urls');
+    } else {
+      // User is NOT logged in - redirect to sign in with a return URL
+      navigate('/Signin', { 
+        state: { 
+          from: '/Urls',
+          message: 'Please sign in to start scanning websites' 
+        } 
+      });
+    }
   };
 
   // Handle logout
   const handleLogout = () => {
     logout();
     setDropdownOpen(false);
-    // Optionally redirect to home or show a message
   };
 
   // Close dropdown when clicking outside
@@ -79,42 +89,40 @@ function Home() {
     window.addEventListener("scroll", handleActiveSection);
     return () => window.removeEventListener("scroll", handleActiveSection);
   }, []);
-useEffect(() => {
-  const text = "Security shouldn't feel distant—it should feel like home. Perhaps it's exactly what you've been needing all along.";
-  const element = document.getElementById("animated-text");
-  if (!element) return;
 
-  let index = 0;
-  let timeoutId;
+  useEffect(() => {
+    const text = "Security shouldn't feel distant—it should feel like home. Perhaps it's exactly what you've been needing all along.";
+    const element = document.getElementById("animated-text");
+    if (!element) return;
 
-  function type() {
-    if (index < text.length) {
-      element.textContent += text.charAt(index);
-      index++;
-      timeoutId = setTimeout(type, 70);
-    } else {
-      timeoutId = setTimeout(() => {
-        element.textContent = "";
-        index = 0;
-        type();
-      }, 4000);
+    let index = 0;
+    let timeoutId;
+
+    function type() {
+      if (index < text.length) {
+        element.textContent += text.charAt(index);
+        index++;
+        timeoutId = setTimeout(type, 70);
+      } else {
+        timeoutId = setTimeout(() => {
+          element.textContent = "";
+          index = 0;
+          type();
+        }, 4000);
+      }
     }
-  }
 
-  type();
+    type();
 
- 
-  return () => clearTimeout(timeoutId);
-}, []);
-
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   return (
     <div className={darkMode ? "dark" : "light"}>
       <div className="heading">
         {/* 🌍 NAVBAR */}
         <nav className="navbar">
-            <span className="brand">CYRA</span>
-         
+          <span className="brand">CYRA</span>
 
           {/* Desktop Nav */}
           <div className="nav-right">
@@ -208,7 +216,7 @@ useEffect(() => {
               <span>EVERY SCAN</span>
             </h1>
             <button className="try" onClick={handleTryNow}>
-              {user ? "Try now" : "Try now."}
+              {user ? "Try now" : "Try now"}
             </button>
           </div>
 
@@ -293,83 +301,80 @@ useEffect(() => {
 
           {/* 🌍 CENTRALIZED TEXT */}
           <section id="services" className="center-text">
-      
             <p className="shield-description typewriter">
               <span id="animated-text"></span>
             </p>
           </section>
           <button className="try" onClick={handleTryNow}>
-              {user ? "Try now" : "Scan now."}
-            </button>
+            {user ? "Start Scanning" : "Scan now"}
+          </button>
         </section>
          
-          <div class="design-section">
-            <footer class="footer-3">
-                <div class="cyber-line"></div>
+        <div className="design-section">
+          <footer className="footer-3">
+            <div className="cyber-line"></div>
 
-                <div class="footer-grid">
-                    <div class="brand-box">
-                        <h2>CYRA</h2>
-                        <p class="tagline">
-                            Advanced vulnerability scanning tool made just for you.
-                        </p>
-                        <div class="tech-badge">🔒 Enterprise Security</div>
-                    </div>
+            <div className="footer-grid">
+              <div className="brand-box">
+                <h2>CYRA</h2>
+                <p className="tagline">
+                  Advanced vulnerability scanning tool made just for you.
+                </p>
+                <div className="tech-badge">🔒 Enterprise Security</div>
+              </div>
 
-                    <div class="link-group">
-                        <h4>Scan</h4>
-                        <ul>
-                            <li>Quick Scan</li>
-                            <li>Deep Analysis</li>
-                            <li>Scheduled</li>
-                            <li>Reports</li>
-                        </ul>
-                    </div>
+              <div className="link-group">
+                <h4>Scan</h4>
+                <ul>
+                  <li>Quick Scan</li>
+                  <li>Deep Analysis</li>
+                  <li>Scheduled</li>
+                  <li>Reports</li>
+                </ul>
+              </div>
 
-                    <div class="link-group">
-                        <h4>Learn</h4>
-                        <ul>
-                            <li>Docs</li>
-                            <li>Guides</li>
-                            <li>API</li>
-                            <li>Blog</li>
-                        </ul>
-                    </div>
+              <div className="link-group">
+                <h4>Learn</h4>
+                <ul>
+                  <li>Docs</li>
+                  <li>Guides</li>
+                  <li>API</li>
+                  <li>Blog</li>
+                </ul>
+              </div>
 
-                    <div class="link-group">
-                        <h4>Connect</h4>
-                        <ul>
-                            <li>Contact</li>
-                            <li>Support</li>
-                            <li>Community</li>
-                            <li>Partners</li>
-                        </ul>
-                    </div>
+              <div className="link-group">
+                <h4>Connect</h4>
+                <ul>
+                  <li>Contact</li>
+                  <li>Support</li>
+                  <li>Community</li>
+                  <li>Partners</li>
+                </ul>
+              </div>
 
-                    <div class="link-group">
-                        <h4>Legal</h4>
-                        <ul>
-                            <li>Privacy</li>
-                            <li>Terms</li>
-                            <li>License</li>
-                            <li>Cookies</li>
-                        </ul>
-                    </div>
-                </div>
+              <div className="link-group">
+                <h4>Legal</h4>
+                <ul>
+                  <li>Privacy</li>
+                  <li>Terms</li>
+                  <li>License</li>
+                  <li>Cookies</li>
+                </ul>
+              </div>
+            </div>
 
-                <div class="footer-bottom">
-                    <div class="copyright">
-                        © 2025 CYRA • Lagos, Nigeria • +234-703-754-8999
-                    </div>
-                    <div class="security-badge">
-                        <div class="security-icon">✓</div>
-                        <span>SOC 2 Compliant</span>
-                    </div>
-                </div>
-            </footer>
+            <div className="footer-bottom">
+              <div className="copyright">
+                © 2025 CYRA • Lagos, Nigeria • +234-703-754-8999
+              </div>
+              <div className="security-badge">
+                <div className="security-icon">✓</div>
+                <span>SOC 2 Compliant</span>
+              </div>
+            </div>
+          </footer>
         </div>
-
-
       </div>
     </div>
   );
