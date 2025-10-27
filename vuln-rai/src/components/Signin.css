@@ -3,15 +3,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(
-    120% 120% at 80% 28%,
-    rgba(31, 11, 98, 1) 15%,
-    rgba(127, 91, 164, 1) 55%,
+   background: radial-gradient(
+    100% 100% at 60% 39%,
+    rgba(31, 11, 98, 1) 23%,
+    rgba(127, 91, 164, 1) 75%,
     rgba(222, 171, 231, 1) 100%
   );
   position: relative;
   overflow: hidden;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Quicksand';
 }
 
 /* Floating shapes */
@@ -84,32 +84,33 @@
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 80px;
-  width: 28rem;
-  height: 28rem;
+  width: 470px;
+  height: 450px;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1;
   animation: slideUp 0.8s ease-out;
-  
+  padding: 20px 35px; 
+  padding-top: 40px; 
 }
 
 /* Title */
 .signin-title {
-  font-size: 18px;
+  font-size: 30px;
   color: white;
   text-align: center;
   position: relative;
   top: 20px;
   margin-bottom: 40px;
 }
-
-/* Form */
 .signin-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 25px; /* Increased from 10px */
+  margin-top: 30px; /* Push form further down */
 }
+
 
 .input-group {
   position: relative;
@@ -254,12 +255,28 @@
 }
 
 .face-image {
-  width: 600px;
-  height: 600px;
+  width: 500px;
+  height: 570px;
   opacity: 0.8;
-  filter: blur(1px);
+  /* margin-right: 70px; */
+  transition: all 0.5s ease-in-out;
+}
+.face-image:hover {
+  opacity: 0.95;
+  transform: scale(1.02);
 }
 
+/* Scroll-trigger animation */
+.face-image.hidden {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.face-image.visible {
+  opacity: 0.9;
+  transform: translateY(0);
+  filter: blur(0.3px);
+  transition: all 1s ease-out;
+}
 /* Navbar */
 .nav-left {
   display: flex;
@@ -267,11 +284,14 @@
   justify-content: center;
   position: relative;
   top: 20px;
+  left: 10px;
 }
 
 .logo {
   width: 60px;
   height: 55px;
+  position: absolute;
+  left: 9rem;
 }
 
 .light .brand {
@@ -282,32 +302,59 @@
   font-size: 20px;
 }
 
-.social-login {
-  text-align: center;
-  margin-top: 20px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
+
+/* CAPTCHA */
+.captcha-container {
+
+  margin-bottom: 1rem;
+  transform: scale(0.28); /* Resize smaller */
+  transform-origin: center;
+  transition: transform 0.3s ease-in-out;
+
+  overflow: hidden;
 }
 
-.social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 10px;
+/* Slightly smaller on small screens */
+@media (max-width: 480px) {
+  .captcha-container {
+    transform: scale(0.7);
+    height: 65px;
+  }
 }
 
-.social-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
+.captcha-container {
+  animation: fadeInScale 0.4s ease-out forwards;
 }
 
-.social-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(0.78);
+  }
+}
+
+ /* Email Validation Message */
+.email-validation {
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+
+
+
+.email-validation.invalid {
+  color: #ef4444;
+}
+
+.email-validation.valid {
+
+  font-color: #22c55e;
+}
+/* Warning Message (for signin captcha warning) */
+.warning-message {
+  color: #ffff;
 }

@@ -2,38 +2,41 @@
 
 /* --- Theme variables (light defaults) --- */
 :root {
-  --primary: #1F0B62;        /* main deep purple */
-  --primary-dark: #15084A;   /* deeper shade */
-  --accent: #6b5cff;
-  --accent-2: #3f3dff;
-  --muted: #e9e7f2;
-  --bg-light: #f5f3f8;
-  --surface: #ffffff;
+  --primary: #1F0B62;          /* deep purple */
+  --primary-light: #7F5BA4;    /* gradient mid-tone */
+  --accent: #DEABE7;           /* gradient light tone */
+  --accent-2: #6b5cff;         /* optional brighter accent */
+  --muted: #F3F0F8;            /* soft background */
+  --bg-light: #FAF8FF;         /* slightly purple-ish instead of plain white */
+  --surface: #FDFCFD;          /* off-white for cards & nav */
   --card-shadow: 0 6px 18px rgba(0,0,0,0.06);
-  --text: #111;
-  --soft-border: rgba(0,0,0,0.06);
-  --chip-bg: #efeef7;
+  --text: #1F0B62;             /* deep purple text instead of black */
+  --soft-border: rgba(31,11,98,0.08); /* subtle borders in purple */
+  --chip-bg: #EFEAF9;          /* soft complementary purple for chips */
 }
 
-/* dark theme overrides (set via data-theme="dark" on <html> or via .dashboard-root.dark) */
+:root .search-input {
+  color: #1F0B62;   /* deep purple or black */
+}
+/* dark theme overrides */
 [data-theme="dark"] {
-  --primary: #7d7bff;       /* slightly brighter primary for dark */
-  --primary-dark: #4b45c2;
-  --accent: #7af0d9;
-  --accent-2: #3f3dff;
-  --muted: #2a2a3a;
-  --bg-light: #0b0420;
-  --surface: #0f0729;
-  --card-shadow: 0 10px 30px rgba(0,0,0,0.35);
-  --text: #f4f3f8;
-  --soft-border: rgba(255,255,255,0.06);
-  --chip-bg: rgba(255,255,255,0.06);
+  --text: #EDE5F3;              /* softer off-white text */
+  --surface: rgba(255,255,255,0.05);  /* cards slightly transparent */
+  --soft-border: rgba(255,255,255,0.15); /* subtle light borders */
+  --accent: #DEABE7;             /* light gradient color for highlights */
+  --accent-2: #7F5BA4;           /* mid-tone accent */
+  --bg-dark: radial-gradient(
+    100% 100% at 60% 39%,
+    rgba(31, 11, 98, 1) 23%,
+    rgba(127, 91, 164, 1) 75%,
+    rgba(222, 171, 231, 1) 100%
+  );
 }
 
 /* support when you add class 'dark' to root too */
 .dashboard-root.dark {
   color: var(--text);
-  background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+  background: var(--bg-dark);
 }
 
 /* Base */
@@ -48,37 +51,46 @@ html, body, #root { height: 100%; margin: 0; font-family: Inter, system-ui, -app
   justify-content: space-between;
   gap: 16px;
   padding: 14px 28px;
-  background: var(--surface);
   border-bottom: 1px solid var(--soft-border);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+  box-shadow: 0 2px 10px rgba(31, 11, 98, 0.05);
   position: sticky;
   top: 0;
   z-index: 60;
 }
 
-/* brand left */
+.topbar::after {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--accent));
+  border-radius: 3px;
+  margin-top: 0;
+}
+
 .brand {
   font-weight: 700;
   letter-spacing: 2px;
-  color: var(--primary);
+  color: #1F0B62;
   min-width: 80px;
   font-size: 1.05rem;
+  margin-left: 60px;
+   cursor: pointer;
+  transition: color 0.3s ease;
+  /* color: #ffff; */
 }
 
-/* center search */
 .search-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  gap: 10px;
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
   padding: 0 8px;
 }
 
-/* the input in the navbar */
 .search-input {
-  width: 60%;
-  max-width: 650px;
+  width: 100%;
+  max-width: 500px;
   min-width: 180px;
   padding: 12px 18px;
   border-radius: 28px;
@@ -90,18 +102,20 @@ html, body, #root { height: 100%; margin: 0; font-family: Inter, system-ui, -app
   transition: box-shadow 160ms ease, transform 160ms ease;
 }
 
-/* small focus effect */
 .search-input:focus {
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   transform: translateY(-1px);
 }
 
-/* feature icon button (use react-icons or emoji) */
 .feature-btn {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
   display: inline-grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: transparent;
   border: 0;
@@ -110,10 +124,15 @@ html, body, #root { height: 100%; margin: 0; font-family: Inter, system-ui, -app
   font-size: 18px;
 }
 
-/* right: profile */
-.profile-area { position: relative; min-width: 60px; display:flex; align-items:center; justify-content:flex-end; }
+.profile-area {
+  position: relative;
+  min-width: 60px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  margin-right: 40px;
+}
 
-/* profile icon circle */
 .profile-icon {
   width: 40px;
   height: 40px;
@@ -127,7 +146,6 @@ html, body, #root { height: 100%; margin: 0; font-family: Inter, system-ui, -app
   border: 1px solid var(--soft-border);
 }
 
-/* dropdown menu (rendered only when JS shows it) */
 .profile-menu {
   position: absolute;
   right: 0;
@@ -135,27 +153,199 @@ html, body, #root { height: 100%; margin: 0; font-family: Inter, system-ui, -app
   background: var(--surface);
   color: var(--text);
   min-width: 200px;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  padding: 10px;
-  z-index: 80;
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+  padding: 12px;
+  animation: fadeIn 0.2s ease;
 }
 
-/* menu items */
-.profile-menu .menu-item { padding: 6px 4px; }
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.profile-trigger:hover {
+  background-color: var(--soft-border);
+}
+
+.profile-email {
+  font-size: 14px;
+  color: var(--text);
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron-icon {
+  transition: transform 0.2s ease;
+}
+
+.profile-trigger:hover .chevron-icon {
+  transform: rotate(180deg);
+}
+
+.profile-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--soft-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  z-index: 1000;
+  padding: 8px 0;
+  margin-top: 8px;
+}
+
+.dropdown-header {
+  padding: 12px 16px 8px;
+  border-bottom: 1px solid var(--soft-border);
+}
+
+.user-email {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--soft-border);
+  margin: 8px 0;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text);
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+}
+
+.dropdown-item:hover {
+  background-color: var(--soft-border);
+}
+
+.dropdown-item svg {
+  flex-shrink: 0;
+}
+
+.logout-btn {
+  color: #ff4757;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 71, 87, 0.1);
+}
+
+/* Theme toggle within dropdown - override existing styles */
+.dropdown-item.theme-toggle {
+  justify-content: space-between !important;
+  cursor: default !important;
+}
+
+.dropdown-item.theme-toggle:hover {
+  background-color: transparent !important;
+}
+
+/* Dark theme overrides for dropdown */
+[data-theme="dark"] .profile-dropdown-menu {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .user-email {
+  color: var(--accent);
+}
+
+[data-theme="dark"] .dropdown-divider {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .logout-btn:hover {
+  background-color: rgba(255, 71, 87, 0.2);
+}
+
+
 .menu-btn {
   width: 100%;
-  padding: 8px 10px;
+  padding: 10px 12px;
   border-radius: 8px;
   background: transparent;
   border: 1px solid var(--soft-border);
   color: inherit;
   cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
 }
+
+.menu-btn:hover {
+  background: var(--soft-border);
+  transform: translateX(2px);
+}
+
 .menu-btn.danger { background: transparent; color: #ff6b6b; border: 0; }
 
-/* theme toggle row */
-.theme-toggle { display:flex; align-items:center; justify-content:space-between; gap:8px; padding-top:6px; }
+.theme-toggle { padding-top:6px; }
+.toggleDisplay{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px
+}
+.toggle-switch {
+  width: 50px;
+  height: 24px;
+  border-radius: 50px;
+  background: var(--soft-border);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.toggle-switch.light { background: #ddd; }
+.toggle-switch.dark { background: #333; }
+.toggle-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  /* background: white; */
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s;
+}
+.toggle-switch.dark .toggle-circle {
+  transform: translateX(26px);
+  background: yellow;
+}
+
+.feature-icon{
+  position: relative;
+  right: 16%;
+  border-radius: 50%;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
 
 /* --- Main container --- */
 .container {
@@ -164,54 +354,63 @@ html, body, #root { height: 100%; margin: 0; font-family: Inter, system-ui, -app
   margin: 0 auto;
 }
 
-/* welcome card - keep purple primary so dark->light still looks good */
-.welcome-card {
-  background: var(--primary);
-  color: #fff;
-  border-radius: 28px;
+/* welcome card */
+.welcome-card { 
+  border-radius: 35px;
   padding: 26px;
-  box-shadow: var(--card-shadow);
+  transition: background 0.3s ease, color 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
   position: relative;
   overflow: visible;
 }
+ 
+/* Light theme → solid purple */
+:root[data-theme="light"] .welcome-card {
+  background: #15084A;
+  color: #fff;
+}
 
-/* keep the spacing/padding of boxes intact (you said you like that) */
-.welcome-card h1 { margin: 0 0 14px 0; letter-spacing: 6px; font-weight: 600; }
+.welcome-card h1 {
+  margin: 0 0 14px 0;
+  letter-spacing: 6px;
+  font-weight: 400;
+  font-size: 22px;
+}
 
-/* scan row: input + scan-controls side-by-side */
-/* .scan-row {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-} */
-
-/* keep row layout */
+/* scan row */
 .scan-row {
   display: flex;
   gap: 14px;
-  align-items: center;   /* align vertically with input */
+  align-items: center;
 }
-
-/* make timeframes float slightly above, scan beside input */
 .scan-controls {
   display: flex;
- position: relative;
- left: 69rem;
   margin-top: 30px;
-  position: relative;
+  margin-right: 60px;        
+  flex-wrap: wrap;  
+  justify-content: flex-end;
 }
 
-.timeframes-dropdown {
-  position: relative;
-}
+
 
 .timeframes-dropdown .tf {
-  background-color: #1F0B62; /* blue button */
+  background-color: var(--primary);
   color: #fff;
   border: none;
   padding: 10px 25px;
   border-radius: 6px;
   cursor: pointer;
+  background: #1F0B62;
+}
+/* Timeframe dropdown (30 days) */
+.timeframes-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+[data-theme="light"] .timeframes-dropdown .tf {
+  background-color: #1F0B62;  /* deep purple only in light mode */
+  color: #fff;
 }
 
 .timeframes-dropdown .dropdown-menu {
@@ -219,64 +418,36 @@ html, body, #root { height: 100%; margin: 0; font-family: Inter, system-ui, -app
   position: absolute;
   top: 110%;
   left: 0;
-  background: #fff;
+  background: var(--surface);
   border-radius: 6px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   overflow: hidden;
   z-index: 10;
 }
-
 .timeframes-dropdown:hover .dropdown-menu {
   display: block;
 }
-
 .dropdown-item {
   padding: 8px 16px;
   cursor: pointer;
-  color: #1F0B62;
-  background-color: #fff;
+  color: var(--primary);
+  background-color: var(--surface);
 }
-
-.dropdown-item:hover, 
-.dropdown-item.active {
-  background-color: #1F0B62;
+.dropdown-item:hover, .dropdown-item.active {
+  background-color: var(--primary);
   color: #fff;
 }
 
-.timeframes {
-  transform: translateY(-6px); /* keeps them a bit higher */
-}
-
-
-
-/* url input inside welcome card (keeps padding) */
 .url-input {
   flex: 1;
   padding: 12px 16px;
   border-radius: 24px;
   border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.04);
+  background: transparent;
   color: inherit;
   outline: none;
 }
 
-/* scan-controls: align the timeframes slightly above and the scan button aligned with input */
-/* .scan-controls {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
-  min-width: 140px;
-} */
-
-/* place timeframes slightly above scan button */
-/* .timeframes {
-  display: flex;
-  gap: 8px;
-  transform: translateY(-8px); 
-} */
-
-/* timeframe pills */
 .tf {
   padding: 6px 10px;
   border-radius: 14px;
@@ -288,27 +459,29 @@ html, body, #root { height: 100%; margin: 0; font-family: Inter, system-ui, -app
   font-size: 0.86rem;
 }
 .tf.active {
-  background: #fff;
-  color: var(--primary);
+  background: var(--accent);
+  color: #fff;
 }
-
-/* scan button sits beside input visually since scan-controls sits next to input */
 .scan-btn {
   padding: 10px 18px;
   border-radius: 18px;
   border: 0;
-  background: #fff;
-  color: var(--primary);
+  background: #ffffff;
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-/* progress area (shown when scanning) */
+[data-theme="dark"] .scan-btn {
+  background: linear-gradient(90deg, var(--primary), var(--accent));  /* deep purple only in dark mode */
+  color: #fff;
+}
+
+/* progress bars */
 .progress-area { margin-top: 16px; }
-.progress-label { margin-bottom: 8px; color: rgba(255,255,255,0.95); font-weight:600; }
+.progress-label { margin-bottom: 8px; color: rgba(0,0,0,0.8); font-weight:600; }
 .progress-bar {
-  background: rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.05);
   height: 12px;
   border-radius: 20px;
   overflow: hidden;
@@ -321,58 +494,38 @@ html, body, #root { height: 100%; margin: 0; font-family: Inter, system-ui, -app
 }
 
 /* --- Widgets / Cards --- */
-/* .widgets {
-  display: flex;
-  gap: 22px;
-  margin-top: 28px;
-  flex-wrap: wrap;
-} */
-
 .widgets {
   display: grid;
-  grid-template-columns: 2fr 1fr;  /* charts takes 2/3, risks takes 1/3 */
+  grid-template-columns: 2fr 1fr;
   gap: 20px;
   margin-top: 20px;
-  align-items: start;   /* keeps risks small */
+  align-items: start;
 }
 
-
-/* generic card */
-.card {
-  background: var(--surface);
-  color: var(--text);
-  padding: 22px;
+.card, .welcome-card, .risks, .findings {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
   border-radius: 22px;
-  flex: 1 1 420px;
-  min-height: 160px;
-  box-shadow: var(--card-shadow);
+  padding: 22px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s ease-in-out;
 }
 
-/* card heading */
 .card-head {
   font-weight: 600;
   color: var(--primary);
   margin-bottom: 12px;
 }
 
-/* Chart area container - will hold responsive recharts containers */
-/* .chart-area {
-  display: flex;
-  gap: 18px;
-  align-items: center;
-  justify-content: space-between;
-  height: 220px;
-  width: 100%;
-} */
-
 .chart-area {
   width: 100%;
-  height: 280px;   /* increased height for readability */
+  height: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 
 .charts-head {
   display: flex;
@@ -390,90 +543,57 @@ html, body, #root { height: 100%; margin: 0; font-family: Inter, system-ui, -app
   font-weight: 600;
   font-size: 0.9rem;
   transition: all 0.2s ease;
+  position: absolute;
+  right: 50px;
 }
-
 .chart-toggle:hover {
   background: var(--accent);
 }
 
-
-/* fallback visuals (in case charts haven't loaded) */
-.pie, .bar {
-  border-radius: 8px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-}
-
-/* risk card (keeps the strong color so chips pop) */
 .risks {
-  background: var(--primary-dark);
+  background: #ffff;
   color: #fff;
-}
-.risks .card-head { color: #fff; }
-
-/* risk chips show inside the card and are always visible */
-/* .risk-chips {
-  display:flex;
-  gap:12px;
-  margin-top:12px;
-  align-items:center;
-} */
-
-/* chip base: keep padding, roundness, and boldness */
-/* .chip {
-  padding: 18px;
-  border-radius: 18px;
-  min-width: 84px;
+  width: 350px;
+  height: 150px;
+  margin: 0 auto;
+  padding: 12px 16px;
   text-align: center;
-  font-weight: 600;
-  background: var(--chip-bg);
-  color: var(--primary-dark);
-} */
-
+}
+.risks .card-head { color: #1F0B62}
 .risk-chips {
   display: flex;
   gap: 10px;
   margin-top: 12px;
   align-items: center;
-  justify-content: center; /* add this */
+  justify-content: center;
+}
+
+
+
+[data-theme="light"] .card risks {
+  background: #1F0B62;
 }
 
 .chip {
-  padding: 10px 14px;   /* smaller padding */
-  border-radius: 14px;  /* smaller rounding */
-  min-width: 70px;      /* smaller width */
-  font-size: 0.9rem;    /* smaller text */
+  padding: 20px 40px;
+  border-radius: 14px;
+  min-width: 70px;
+  font-size: 0.9rem;
   font-weight: 600;
-  text-align: center;
+  justify-content: center;
 }
+.chip.high { background: rgba(222,171,231,0.3); color: #7F5BA4; }
+.chip.medium { background: rgba(127,91,164,0.3); color: #1F0B62; }
+.chip.low { background: rgba(107,92,255,0.2); color: #1F0B62; }
 
-.card.risks {
-  width: 350px; 
-  height: 250px;   
-  margin: 0 auto;      
-  padding: 12px 16px;
-  text-align: center;  
-}
-
-
-
-/* color variants (ensure readable in both themes) */
-.chip.high { background: #ffe8e8; color: #b00000; }
-.chip.medium { background: #fff3cd; color: #8a5a00; }
-.chip.low { background: #e6faea; color: #007a2f; }
-
-/* --- Findings table --- */
 .findings {
   margin-top: 34px;
-  background: var(--surface);
+  background: rgba(255,255,255,0.12);
   padding: 22px;
   border-radius: 22px;
-  box-shadow: var(--card-shadow);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
 }
 .findings h2 { margin: 0 0 16px 0; color: var(--primary); }
-
 .findings-table {
   width: 100%;
   border-collapse: collapse;
@@ -487,15 +607,14 @@ html, body, #root { height: 100%; margin: 0; font-family: Inter, system-ui, -app
 .severity.medium { color: #ff9900; font-weight: 700; }
 .severity.low { color: #2aa952; font-weight: 700; }
 
-/* action menu inside findings */
 .actions-cell { position: relative; }
 .more { background: transparent; border: 0; font-size: 18px; cursor: pointer; color: var(--text); }
 .action-menu {
   position: absolute;
   right: 6px;
   top: 28px;
-  background: var(--surface);
-  color: var(--text);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
   padding: 8px;
   border-radius: 8px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.12);
@@ -504,14 +623,11 @@ html, body, #root { height: 100%; margin: 0; font-family: Inter, system-ui, -app
 }
 .action-item { background: transparent; border: 0; padding: 8px 12px; text-align: left; cursor: pointer; }
 
-/* footer */
 .foot { text-align: center; padding: 24px 0; color: rgba(0,0,0,0.4); }
 
-/* --- small helper styles and transitions --- */
 button { transition: transform 120ms ease, background 120ms ease; }
 button:hover { transform: translateY(-2px); }
 
-/* --- Responsiveness (kept as requested) --- */
 @media (max-width: 900px) {
   .search-input { width: 48%; }
   .container { padding: 20px; }
@@ -525,12 +641,123 @@ button:hover { transform: translateY(-2px); }
   .feature-btn { display: none; }
   .topbar { padding: 12px; }
   .welcome-card h1 { font-size: 20px; }
-  .timeframes { display: none; } /* hide timeframe pills on very small screens */
+  .timeframes { display: none; }
   .scan-row { flex-direction: column; gap: 12px; }
   .scan-controls { align-items: stretch; flex-direction: row; justify-content: space-between; }
   .scan-btn { width: 100%; }
   .profile-menu { right: 6px; left: auto; }
 }
 
-/* quick accessibility focus */
 .search-input:focus, .menu-btn:focus, .scan-btn:focus, .more:focus { outline: 2px solid rgba(0,0,0,0.06); outline-offset: 4px; }
+
+
+.scanned-site {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow-md);
+}
+
+.scanned-site h2 {
+  margin-bottom: 0.5rem;
+}
+
+.site-info p {
+  margin: 0.2rem 0;
+}
+
+.close-btn {
+  padding: 8px 16px;
+  background: #1F0B62;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.close-btn:hover {
+  background: #15084A
+  transform: translateY(-1px);
+}
+
+.close-btn:active {
+  transform: translateY(0);
+}
+
+.report-row {
+  background: transparent;
+}
+
+.report-box {
+  background: #fff;
+  color: blue;
+  border-radius: 10px;
+  padding: 20px;
+  /* box-shadow: 0 4px 12px rgba(0,0,0,0.15); */
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.report-box h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.report-box p {
+  margin: 5px 0;
+}
+
+.report-box .close-btn {
+  background: rgb(74, 74, 207);
+  color: white;
+  padding: 5px 12px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.report-box .close-btn:hover {
+  background: #000;
+}
+
+
+.report-row {
+  background: transparent;
+}
+
+.report-box {
+  background: #fff;
+  color: #1F0B62;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.report-box h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.report-box p {
+  margin: 5px 0;
+}
+
+.report-box .close-btn {
+  background: #1F0B62;
+  color: white;
+  padding: 5px 12px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.report-box .close-btn:hover {
+  background: #000;
+}

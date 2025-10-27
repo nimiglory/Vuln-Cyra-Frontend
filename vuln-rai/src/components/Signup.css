@@ -4,15 +4,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-    background: radial-gradient(
-    120% 120% at 80% 28%,
-    rgba(31, 11, 98, 1) 15%,
-    rgba(127, 91, 164, 1) 55%,
+  background: radial-gradient(
+    100% 100% at 60% 39%,
+    rgba(31, 11, 98, 1) 23%,
+    rgba(127, 91, 164, 1) 75%,
     rgba(222, 171, 231, 1) 100%
   );
   position: relative;
   overflow: hidden;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Quicksand';
 }
 
 .background-shapes {
@@ -78,60 +78,37 @@
 }
 
 .signup-card {
-  /* background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2); */
-   /* background: rgba(255, 255, 255, 0.05); 
-  backdrop-filter: blur(8px);         */
-  background: rgba(255, 255, 255, 0.04); /* lighter */
-  backdrop-filter: blur(3px);  
-  -webkit-backdrop-filter: blur(8px);    /* for Safari */
-  border: 1px solid rgba(255, 255, 255, 0.15); /* softer border */
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 90px;
-  padding: 10px 15px;
-  width: 34rem;
-  /* max-width: 420px; */
-   height: 35rem;
-  /* box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); /* softer shadow */
+  padding: 10px 25px; /* Added proper padding */
+  width: 500px;
+  min-height: 420px; /* Increased to accommodate CAPTCHA */
+  max-height: auto;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-/* .logo {
-  text-align: center;
-  margin-bottom: 32px;
-} */
-
-/* .logo-text {
-  font-size: 24px;
-  font-weight: 700;
-  color: white;
-  letter-spacing: 2px;
-} */
-
 .signup-title {
-  font-size: 18px;
-  /* font-weight: 600; */
+  font-size: 30px;
   color: white;
   text-align: center;
-  position: relative;
-  top: 20px;
-  margin-bottom: 40px;
-  /* letter-spacing: -0.5px; */
+  margin-top: 10px;
+  margin-bottom: 25px; /* Reduced margin */
 }
+
 
 .signup-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px; /* Reduced gap slightly */
+  width: 100%;
 }
-
-/* .input-group {
-  position: relative;
-  display: flex;
-  align-items: center;
-} */
 
 .input-group {
   position: relative;
@@ -197,27 +174,6 @@
   color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
 }
-/* .password-toggle:hover {
-  color: rgba(255, 255, 255, 0.8);
-} */
-
-.signup-btn {
-  width: 85px;   /* smaller button */
-  /* max-width: 220px; */
-  margin: 16px auto 0; /* centers button */
-  height: 50px;
-  background: #1F0B62;
-  opacity: 70%;
-  border: none;
-  border-radius: 20px;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
-}
-
 
 .signin-btn:hover {
   transform: translateY(-2px);
@@ -295,15 +251,28 @@
   pointer-events: none; */
 }
 
-.face-image {
-  width: 600px;
-  height: 600px;
-  /* object-fit: cover; */
-  opacity: 0.8;
-  filter: blur(1px); 
-  /* border-radius: 50%; */
-} 
 
+.face-image{
+  opacity: 0.7;
+  margin-right: 70px;
+  transition: all 0.5s ease-in-out;
+}
+.face-image:hover {
+  opacity: 0.95;
+  transform: scale(1.02);
+}
+
+/* Scroll-trigger animation */
+.face-image.hidden {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.face-image.visible {
+  opacity: 0.9;
+  transform: translateY(0);
+  filter: blur(0.3px);
+  transition: all 1s ease-out;
+}
 .nav-left {
   display: flex;
   align-items: center;
@@ -315,7 +284,10 @@
 .logo {
   width: 60px;
   height: 55px;
+  position: absolute;
+  left: 20px;
 }
+
 
 .light .brand {
   color: #000;
@@ -325,32 +297,113 @@
     font-size: 20px;
 }
 
-.social-login {
-  text-align: center;
-  margin-top: 20px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
+/* Responsive CAPTCHA */
+@media (max-width: 768px) {
+  .captcha-container {
+    transform: scale(0.65) !important;
+    height: 45px !important;
+  }
+  
+  .signup-card {
+    width: 90%;
+    min-height: 580px;
+    padding: 25px 30px;
+  }
 }
 
-.social-icons {
+@media (max-width: 480px) {
+  .captcha-container {
+    transform: scale(0.6) !important;
+    height: 40px !important;
+  }
+  
+  .signup-card {
+    margin: 20px;
+    padding: 20px 24px;
+    min-height: 550px;
+  }
+  
+  .signup-title {
+    font-size: 16px;
+  }
+  
+  .form-input {
+    height: 52px;
+    font-size: 15px;
+  }
+}
+
+/* Button styling */
+.signin-btn {
+  width: 120px;
+  height: 48px;
+  margin: 10px auto 0;
+  background: #1F0B62;
+  opacity: 0.7;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+}
+
+
+/* Email Validation Message */
+.email-validation {
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.email-validation.invalid {
+  color: #ef4444;
+}
+
+.email-validation.valid {
+  color: #22c55e;
+
+}
+
+.password-strength.weak {
+  color: #ef4444;
+  font-size: 0.75rem;
+}
+
+.password-strength.strong {
+  color: #22c55e;
+
+}
+
+/* Password Match Message */
+.password-match {
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.password-match.no-match {
+  font-size: 0.75rem;
+  color: #ef4444;
+}
+
+.password-match.match {
+  color: #22c55e;
+}
+
+/* Error Message */
+.error-message {
+  color: #ffff;  
+}
+
+/* Warning Message (for signin captcha warning) */
+.warning-message {
+  color: #ffff;
+}
+
+/* Captcha Container */
+.captcha-container {
+  margin-bottom: 1rem;
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-top: 10px;
-}
-
-.social-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.social-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
 }
