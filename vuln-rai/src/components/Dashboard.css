@@ -16,9 +16,9 @@
 }
 
 :root .search-input {
-  color: #1F0B62;   /* deep purple or black */
+  color: #1F0B62;   
 }
-/* dark theme overrides */
+
 [data-theme="dark"] {
   --text: #EDE5F3;              /* softer off-white text */
   --surface: rgba(255,255,255,0.05);  /* cards slightly transparent */

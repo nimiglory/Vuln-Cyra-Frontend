@@ -1,38 +1,10 @@
-// import axios from "axios";
-
-
-// const api = axios.create({
-//   baseURL: import.meta.env.VITE_API_BASE_URL, // Vite way
-//   withCredentials: true,
-// });
-
-// export const signup = (userData) => api.post("api/signup/", userData);
-// export const signin = (credentials) => api.post("api/signin/", credentials);
-
-
-// export default api;
-
-// import axios from "axios";
-
-// const api = axios.create({
-//   baseURL: import.meta.env.VITE_API_BASE_URL, // Vite way
-//   withCredentials: true,
-// });
-
-// export const signup = (userData) => api.post("api/signup/", userData);
-// export const signin = (credentials) => api.post("api/signin/", credentials);
-
-// export default api;
-
-
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL, // Make sure this is correct
+  baseURL: import.meta.env.VITE_API_BASE_URL, 
   withCredentials: true,
 });
 
-// Add request interceptor to include token
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("access");
@@ -45,20 +17,6 @@ api.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-
-// Add response interceptor for token refresh
-// api.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     if (error.response?.status === 401) {
-//       // Token might be expired, try to refresh or logout
-//       localStorage.removeItem("access");
-//       localStorage.removeItem("refresh");
-//       window.location.reload(); // Force re-login
-//     }
-//     return Promise.reject(error);
-//   }
-// );
 
 api.interceptors.response.use(
   (response) => response,
